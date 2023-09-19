@@ -1,24 +1,50 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import "./style.css";
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+function generateRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
-setupCounter(document.querySelector('#counter'))
+function generateRandomColor(min, max) {
+  const r = generateRandomNumber(0, 255);
+  const g = generateRandomNumber(0, 255);
+  const b = generateRandomNumber(0, 255);
+  return `rgb(${r},${g},${b})`;
+}
+
+const confettiLayout = document.querySelector("#confetti-layout");
+const app = document.querySelector("#app");
+const button = document.querySelector("#celebrate");
+
+for (let i = 0; i < 100; i++) {
+  const newDiv = document.createElement("div");
+  newDiv.style.backgroundColor = generateRandomColor();
+  newDiv.style.padding = `${generateRandomNumber(5, 20)}px`;
+  newDiv.style.position = "absolute";
+  confettiLayout.appendChild(newDiv);
+}
+const newDivList = document.querySelectorAll("#confetti-layout div");
+
+let timer;
+button.addEventListener("click", () => {
+  newDivList.forEach((div) => {
+    const insideX = generateRandomNumber(0, 680);
+    const insideY = generateRandomNumber(0, 330);
+    const randomX = generateRandomNumber(-insideX, insideX) + "px";
+    const randomY = generateRandomNumber(-insideY, insideY) + "px";
+
+    const randomRotate = generateRandomNumber(-720, 720);
+
+    div.style.transition = "all";
+    div.style.transitionDuration = `${generateRandomNumber(1000, 5000)}ms`;
+    div.style.transform = `translate(${randomX},${randomY}) rotate(${randomRotate}deg)`;
+  });
+
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    newDivList.forEach((div) => {
+      div.style.transition = "all";
+      div.style.transitionDuration = `${generateRandomNumber(1000, 5000)}ms`;
+      div.style.transform = `translate(0,0) rotate(0)`;
+    });
+  }, 5000);
+});
