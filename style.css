@@ -19,10 +19,10 @@ body {
 }
 
 #app button {
-  background-color: rgb(77, 0, 184);
+  background-color: rgba(77, 0, 184, 0.486);
   color: white;
-  padding: 26px 36px;
-  font-size: 26px;
+  padding: 10px 20px;
+  font-size: 18px;
   border-radius: 12px;
   border-style: none;
   cursor: pointer;
@@ -30,9 +30,15 @@ body {
 }
 
 #app button:hover {
-  background-color: rgb(94, 0, 225);
+  background-color: rgba(94, 0, 225, 0.517);
 }
 
 #confetti-layout {
   position: absolute;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
