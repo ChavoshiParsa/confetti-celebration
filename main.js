@@ -60,7 +60,7 @@ button.addEventListener("click", () => {
 let newDivList = [];
 
 setInterval(() => {
-  for (let i = 0; i < 500; i++) {
+  for (let i = 0; i < 5000; i++) {
     const newDiv = document.createElement("div");
     newDiv.style.backgroundColor = generateRandomColor();
     newDiv.style.width = GRN(8, 20) + "px";
